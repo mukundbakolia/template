@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<body>
+
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+
+//data
+ getData();
+   async function getData() {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxYjSIBJ4jb0fwuSTl2Ntrp3ElUdx7DNuE02fvDUT61LO8eoMo1ZPsF_e39XjUQ8xeW/exec');
+      const data = await response.json();
+      console.log(data);
+      length = data.data.length;
+      console.log(length);
+      labels = [];
+      values = [];
+      for (i = 0; i < length; i++) {
+         labels.push(data.data[i].Year);
+         values.push(data.data[i].Years);
+      }
+//data
+
+
+var barColors = ["red", "green","blue","orange","brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: labels,
+    datasets: [{
+      backgroundColor: barColors,
+      data: values
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "World Wine Production 2018"
+    }
+  }
+});
+
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
